@@ -1,0 +1,48 @@
+﻿@page "/agregarCliente"
+@using Data
+@using Interfaces
+@inject IClienteServices clientesServicio
+
+<h1>Agregar un nuevo Cliente</h1>
+
+<EditForm Model="@cliente">
+    <table class="table">
+        <tr>
+            <td>Nombre:</td>
+            <td><input type="text" @bind="@cliente.Nombre" /></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" @bind="cliente.Email" /></td>
+        </tr>
+        <tr>
+            <td>Telefono:</td>
+            <td><input type="text" @bind="cliente.Telefono" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-primary" value="Guardar" @onclick="@Guardar" />
+                <input type="button" value="Cancelar" class="btn btn-danger" @onclick="@Cancelar" />
+            </td>
+
+
+        </tr>
+
+    </table>
+
+</EditForm>
+
+
+@code {
+    Cliente cliente = new Cliente();
+    protected async Task Guardar()
+    {
+        await clientesServicio.GuardarCliente(cliente);
+    }
+    protected void Cancelar()
+    {
+        
+    }
+
+}
